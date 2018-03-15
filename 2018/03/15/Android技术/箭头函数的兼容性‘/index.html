@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>使app出现在“用其他应用打开”列表当中 | 不语的日晷</title>
+  <title>箭头函数的兼容性‘ | 不语的日晷</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实际上，这是一种隐式启动activity的方式。为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。实现如下1234567891011121314&amp;lt;intent-filter&amp;gt;	&amp;lt;action android:name=&amp;quot;android.intent.action.VIEW&amp;quot; /&amp;gt;	&amp;lt;action android:name=&amp;">
-<meta name="keywords" content="Android">
+  <meta name="description" content="项目里，需要通过Android的webview加载一个html文件，并执行相应的js脚本。发现在部分低版本手机上，js报错的情况。主要集中在低版本的webview中。debug后发现，是js脚本中存在箭头函数（lambda表达式），导致执行失败，替换为常规函数即可。 推测是：低版本webView中，还不支持这种js语法。">
+<meta name="keywords" content="Android,webview,js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使app出现在“用其他应用打开”列表当中">
-<meta property="og:url" content="http://yoursite.com/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/index.html">
+<meta property="og:title" content="箭头函数的兼容性‘">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/Android技术/箭头函数的兼容性‘/index.html">
 <meta property="og:site_name" content="不语的日晷">
-<meta property="og:description" content="实际上，这是一种隐式启动activity的方式。为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。实现如下1234567891011121314&amp;lt;intent-filter&amp;gt;	&amp;lt;action android:name=&amp;quot;android.intent.action.VIEW&amp;quot; /&amp;gt;	&amp;lt;action android:name=&amp;">
+<meta property="og:description" content="项目里，需要通过Android的webview加载一个html文件，并执行相应的js脚本。发现在部分低版本手机上，js报错的情况。主要集中在低版本的webview中。debug后发现，是js脚本中存在箭头函数（lambda表达式），导致执行失败，替换为常规函数即可。 推测是：低版本webView中，还不支持这种js语法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T02:26:43.533Z">
+<meta property="og:updated_time" content="2018-03-15T09:03:42.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使app出现在“用其他应用打开”列表当中">
-<meta name="twitter:description" content="实际上，这是一种隐式启动activity的方式。为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。实现如下1234567891011121314&amp;lt;intent-filter&amp;gt;	&amp;lt;action android:name=&amp;quot;android.intent.action.VIEW&amp;quot; /&amp;gt;	&amp;lt;action android:name=&amp;">
+<meta name="twitter:title" content="箭头函数的兼容性‘">
+<meta name="twitter:description" content="项目里，需要通过Android的webview加载一个html文件，并执行相应的js脚本。发现在部分低版本手机上，js报错的情况。主要集中在低版本的webview中。debug后发现，是js脚本中存在箭头函数（lambda表达式），导致执行失败，替换为常规函数即可。 推测是：低版本webView中，还不支持这种js语法。">
   
     <link rel="alternative" href="/atom.xml" title="不语的日晷" type="application/atom+xml">
   
@@ -139,31 +139,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Android技术/使app出现在“用其他应用打开”列表当中" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="android中js 箭头函数的兼容性-Android技术/箭头函数的兼容性‘" class="article article-type-android中js 箭头函数的兼容性 " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      使app出现在“用其他应用打开”列表当中
+      箭头函数的兼容性‘
     </h1>
   
 
         
-        <a href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" class="archive-article-date">
-  	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+        <a href="/2018/03/15/Android技术/箭头函数的兼容性‘/" class="archive-article-date">
+  	<time datetime="2018-03-15T08:32:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>实际上，这是一种隐式启动activity的方式。<br>为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。<br>实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;intent-filter&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;data android:scheme=&quot;file&quot;/&gt;</div><div class="line">	&lt;data android:scheme=&quot;content&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;data android:mimeType=&quot;application/zip&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/comma-separated-values&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/intent-filter&gt;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>.csv文件关联的写法比较特别，不是用缩写</p>
-<p>是否能申明使用dialog或者fragment去处理外部传入的数据？</p>
-</blockquote>
+        <p>项目里，需要通过Android的webview加载一个html文件，并执行相应的js脚本。发现在部分低版本手机上，js报错的情况。主要集中在低版本的webview中。debug后发现，是js脚本中存在箭头函数（lambda表达式），导致执行失败，替换为常规函数即可。</p>
+<p>推测是：低版本webView中，还不支持这种js语法。</p>
 
       
 
@@ -199,6 +196,14 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webview</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
@@ -254,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/15/Android技术/箭头函数的兼容性‘/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -268,18 +273,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/24/Android技术/Android-调整窗口透明度/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Android-调整窗口透明度
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/24/Android技术/setClickable(false)失效原因。/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">setClickable(false)失效原因。</div>
+    <a href="/2018/03/02/TDD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TDD - 2018</div>
       <i class="icon-circle-right"></i>
     </a>
   

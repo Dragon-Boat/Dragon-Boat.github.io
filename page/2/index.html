@@ -136,6 +136,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Litho/Litho翻译：不可变和线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/24/Litho/Litho翻译：不可变和线程安全/">Litho翻译：不可变和线程安全</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/24/Litho/Litho翻译：不可变和线程安全/" class="archive-article-date">
+  	<time datetime="2018-01-24T02:10:51.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>原文地址：<a href="https://fblitho.com/docs/asynchronous-layout" target="_blank" rel="external">https://fblitho.com/docs/asynchronous-layout</a></p>
+</blockquote>
+<h1 id="不可变和线程安全"><a href="#不可变和线程安全" class="headerlink" title="不可变和线程安全"></a>不可变和线程安全</h1><p>大多数线程安全问题，来源自对可变对象的并发读写。以下是一个在java中的典型并发问题代码片段：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1982126-cf29fed61392e45d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>如果多个线程调用同一个SomeExampleClass对象的getThisOrThat方法时，就会出现一个典型的竞争条件。当第二个线调用此方法并尝试读取mCount变量时，第一个线程此时可能正在执行mCount++操作，因此，我们就无法确定第二个线程将会读取到什么值。这个问题的根本原因，就是多个线程尝试读写了一个可变对象mCounter。一般来说，当我们遇到将计算分配到各个不同线程中去计算的问题时，竞争条件是最常见的问题。</p>
+<p>竞争条件的存在，导致了在多线程中处理UI问题变得特别复杂。在Android中，view对象都都是富有状态并且状态可被改变。例如TextView，在保持当前文本的同时，需要给开发者暴露setText()的方法，允许改变其状态。这意味着在Android系统中，如果UI框架打算在其他线程中执行耗时计算（如layout）时，框架就必须解决在耗时计算的同时，对象的状态可能被其他线程修改的问题。</p>
+        
+          <a class="article-more-a" href="/2018/01/24/Litho/Litho翻译：不可变和线程安全/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Litho</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">译文</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/24/Litho/Litho翻译：不可变和线程安全/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Android技术/Android复杂列表的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -489,6 +575,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
             
             <div class="clearfix"></div>
