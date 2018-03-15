@@ -476,19 +476,19 @@ dimBackground(0.5f,1.0f);
 
 
   
-    <article id="post-Android技术/RecyclerView使用swapAdapter来切换adapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Android技术/使app出现在“用其他应用打开”列表当中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/">RecyclerView使用swapAdapter来切换adapter</a>
+      <a class="article-title" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">使app出现在“用其他应用打开”列表当中</a>
     </h1>
   
 
         
-        <a href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/" class="archive-article-date">
+        <a href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" class="archive-article-date">
   	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
 </a>
         
@@ -496,12 +496,11 @@ dimBackground(0.5f,1.0f);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#小记<br>我们使用RecyclerView时候，一般是setAdapter一次，之后通过调用adapter.notify()来更新数据和UI（不讨论差量更新）。<br>最近由于业务需求，出现一个界面中由一个RecyclerView承载所有内容，但是可以通过界面内tab_button来切换内容类别的情况，用于内容数据量较大，希望来回切换能流畅迅速。因此这里我采用了多个adapter来记录不同的类别数据，来回切换只要调用setAdapter(Adapter adapter)即可，实际也如愿完成了功能。<br>偶然看recyclerView源码中，有这样一个函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Swaps the current adapter with the provided one. It is similar to</div><div class="line"> * &#123;@link #setAdapter(Adapter)&#125; but assumes existing adapter and the new adapter uses the same</div><div class="line"> * &#123;@link ViewHolder&#125; and does not clear the RecycledViewPool.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * Note that it still calls onAdapterChanged callbacks.</div><div class="line"> *</div><div class="line"> * @param adapter The new adapter to set, or null to set no adapter.</div><div class="line"> * @param removeAndRecycleExistingViews If set to true, RecyclerView will recycle all existing</div><div class="line"> *                                      Views. If adapters have stable ids and/or you want to</div><div class="line"> *                                      animate the disappearing views, you may prefer to set</div><div class="line"> *                                      this to false.</div><div class="line"> * @see #setAdapter(Adapter)</div><div class="line"> */</div><div class="line">public void swapAdapter(Adapter adapter, boolean removeAndRecycleExistingViews) &#123;</div><div class="line">    // bail out if layout is frozen</div><div class="line">    setLayoutFrozen(false);</div><div class="line">    setAdapterInternal(adapter, true, removeAndRecycleExistingViews);</div><div class="line">    setDataSetChangedAfterLayout();</div><div class="line">    requestLayout();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>看注释基本就能够明白，这是一个和setAdapter类似的方法，不过，针对于界面view结构类似或者相同，需要频繁设置adapter的时候，做了优化，能够再切换的时候复用相同的viewHolder，减少一定的开销。</p>
-<hr>
-<ul>
-<li>ToDo： 比较两种方法下，性能提升数据。</li>
-</ul>
+        <p>实际上，这是一种隐式启动activity的方式。<br>为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。<br>实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;intent-filter&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;data android:scheme=&quot;file&quot;/&gt;</div><div class="line">	&lt;data android:scheme=&quot;content&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;data android:mimeType=&quot;application/zip&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/comma-separated-values&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/intent-filter&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>.csv文件关联的写法比较特别，不是用缩写</p>
+<p>是否能申明使用dialog或者fragment去处理外部传入的数据？</p>
+</blockquote>
 
       
 
@@ -525,7 +524,7 @@ dimBackground(0.5f,1.0f);
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">展开全文 >></a>
         </p>
       
 
@@ -804,19 +803,19 @@ dimBackground(0.5f,1.0f);
 
 
   
-    <article id="post-Android技术/使app出现在“用其他应用打开”列表当中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Android技术/RecyclerView使用swapAdapter来切换adapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">使app出现在“用其他应用打开”列表当中</a>
+      <a class="article-title" href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/">RecyclerView使用swapAdapter来切换adapter</a>
     </h1>
   
 
         
-        <a href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" class="archive-article-date">
+        <a href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/" class="archive-article-date">
   	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
 </a>
         
@@ -824,11 +823,12 @@ dimBackground(0.5f,1.0f);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>实际上，这是一种隐式启动activity的方式。<br>为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。<br>实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;intent-filter&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;data android:scheme=&quot;file&quot;/&gt;</div><div class="line">	&lt;data android:scheme=&quot;content&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;data android:mimeType=&quot;application/zip&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/comma-separated-values&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/intent-filter&gt;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>.csv文件关联的写法比较特别，不是用缩写</p>
-<p>是否能申明使用dialog或者fragment去处理外部传入的数据？</p>
-</blockquote>
+        <p>#小记<br>我们使用RecyclerView时候，一般是setAdapter一次，之后通过调用adapter.notify()来更新数据和UI（不讨论差量更新）。<br>最近由于业务需求，出现一个界面中由一个RecyclerView承载所有内容，但是可以通过界面内tab_button来切换内容类别的情况，用于内容数据量较大，希望来回切换能流畅迅速。因此这里我采用了多个adapter来记录不同的类别数据，来回切换只要调用setAdapter(Adapter adapter)即可，实际也如愿完成了功能。<br>偶然看recyclerView源码中，有这样一个函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Swaps the current adapter with the provided one. It is similar to</div><div class="line"> * &#123;@link #setAdapter(Adapter)&#125; but assumes existing adapter and the new adapter uses the same</div><div class="line"> * &#123;@link ViewHolder&#125; and does not clear the RecycledViewPool.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * Note that it still calls onAdapterChanged callbacks.</div><div class="line"> *</div><div class="line"> * @param adapter The new adapter to set, or null to set no adapter.</div><div class="line"> * @param removeAndRecycleExistingViews If set to true, RecyclerView will recycle all existing</div><div class="line"> *                                      Views. If adapters have stable ids and/or you want to</div><div class="line"> *                                      animate the disappearing views, you may prefer to set</div><div class="line"> *                                      this to false.</div><div class="line"> * @see #setAdapter(Adapter)</div><div class="line"> */</div><div class="line">public void swapAdapter(Adapter adapter, boolean removeAndRecycleExistingViews) &#123;</div><div class="line">    // bail out if layout is frozen</div><div class="line">    setLayoutFrozen(false);</div><div class="line">    setAdapterInternal(adapter, true, removeAndRecycleExistingViews);</div><div class="line">    setDataSetChangedAfterLayout();</div><div class="line">    requestLayout();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看注释基本就能够明白，这是一个和setAdapter类似的方法，不过，针对于界面view结构类似或者相同，需要频繁设置adapter的时候，做了优化，能够再切换的时候复用相同的viewHolder，减少一定的开销。</p>
+<hr>
+<ul>
+<li>ToDo： 比较两种方法下，性能提升数据。</li>
+</ul>
 
       
 
@@ -852,7 +852,7 @@ dimBackground(0.5f,1.0f);
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView使用swapAdapter来切换adapter/">展开全文 >></a>
         </p>
       
 
