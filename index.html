@@ -294,6 +294,107 @@
 
 
   
+    <article id="post-Android技术/Android-调整窗口透明度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/24/Android技术/Android-调整窗口透明度/">Android-调整窗口透明度</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/24/Android技术/Android-调整窗口透明度/" class="archive-article-date">
+  	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   /**</p>
+<pre><code> * 调整窗口的透明度
+ * @param from&gt;=0&amp;&amp;from&lt;=1.0f
+ * @param to&gt;=0&amp;&amp;to&lt;=1.0f
+ * 
+ * */
+private void dimBackground(final float from, final float to) {
+    final Window window = getWindow();
+    ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to);
+    valueAnimator.setDuration(500);
+    valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.alpha = (Float) animation.getAnimatedValue();
+            window.setAttributes(params);
+        }
+    });
+
+    valueAnimator.start();
+}
+</code></pre><p>然后这样调用：</p>
+<pre><code>/** 窗口背景变暗*/
+dimBackground(1.0f,0.5f);
+
+
+/** 窗口背景变亮*/
+dimBackground(0.5f,1.0f);
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/24/Android技术/Android-调整窗口透明度/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Android技术/Android中一个ListView中图片加载的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -454,19 +555,19 @@
 
 
   
-    <article id="post-Android技术/Android-调整窗口透明度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Android技术/RecyclerView#ItemDecoration入门与进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/Android技术/Android-调整窗口透明度/">Android-调整窗口透明度</a>
+      <a class="article-title" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/">RecyclerView#ItemDecoration入门与进阶</a>
     </h1>
   
 
         
-        <a href="/2018/01/24/Android技术/Android-调整窗口透明度/" class="archive-article-date">
+        <a href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/" class="archive-article-date">
   	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
 </a>
         
@@ -474,113 +575,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>   /**</p>
-<pre><code> * 调整窗口的透明度
- * @param from&gt;=0&amp;&amp;from&lt;=1.0f
- * @param to&gt;=0&amp;&amp;to&lt;=1.0f
- * 
- * */
-private void dimBackground(final float from, final float to) {
-    final Window window = getWindow();
-    ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to);
-    valueAnimator.setDuration(500);
-    valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            WindowManager.LayoutParams params = window.getAttributes();
-            params.alpha = (Float) animation.getAnimatedValue();
-            window.setAttributes(params);
-        }
-    });
-
-    valueAnimator.start();
-}
-</code></pre><p>然后这样调用：</p>
-<pre><code>/** 窗口背景变暗*/
-dimBackground(1.0f,0.5f);
-
-
-/** 窗口背景变亮*/
-dimBackground(0.5f,1.0f);
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/Android技术/Android-调整窗口透明度/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Android技术/使app出现在“用其他应用打开”列表当中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">使app出现在“用其他应用打开”列表当中</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" class="archive-article-date">
-  	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实际上，这是一种隐式启动activity的方式。<br>为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。<br>实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;intent-filter&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;data android:scheme=&quot;file&quot;/&gt;</div><div class="line">	&lt;data android:scheme=&quot;content&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;data android:mimeType=&quot;application/zip&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/comma-separated-values&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/intent-filter&gt;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>.csv文件关联的写法比较特别，不是用缩写</p>
-<p>是否能申明使用dialog或者fragment去处理外部传入的数据？</p>
+        <p>使用RecyclerView替代ListView已经是老生常谈的话题了，RecyclerView的优秀和灵活已经经过了大量项目的实践。最近在完成一个分组列表的需求时，使用到ItemDecoration，故在此对其做一番总结，加深对其的理解。</p>
+<h1 id="ItemDecoration介绍"><a href="#ItemDecoration介绍" class="headerlink" title="ItemDecoration介绍"></a>ItemDecoration介绍</h1><blockquote>
+<p>An ItemDecoration allows the application to add a special drawing and layout offset to specific item views from the adapter’s data set. This can be useful for drawing dividers between items, highlights, visual grouping boundaries and more. </p>
+<p>ItemDecoration允许应用结合adapter的数据集，对特定的item添加绘制一个周边图案。可以用于给items之间添加分割线、高亮装饰效果或者分组边界等等。</p>
 </blockquote>
-
+<p>从谷歌官方的介绍可以知道，ItemDecoration是用于给列表的item添加各种装饰效果，开发中最常见的就是为item添加分割线。<br>ItemDecoration本身是一个抽象类，抛去废弃的方法，我们需要关心的方法只有三个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static abstract class ItemDecoration &#123;</div><div class="line">    public void onDraw(Canvas c, RecyclerView parent, State state) &#123;</div><div class="line">        onDraw(c, parent);</div><div class="line">    &#125;</div><div class="line">    public void onDrawOver(Canvas c, RecyclerView parent, State state) &#123;</div><div class="line">        onDrawOver(c, parent);</div><div class="line">    &#125;</div><div class="line">    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) &#123;</div><div class="line">        getItemOffsets(outRect, ((LayoutParams) view.getLayoutParams()).getViewLayoutPosition(),parent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/#more">more >></a>
+        
       
 
       
@@ -603,7 +606,7 @@ dimBackground(0.5f,1.0f);
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/">展开全文 >></a>
         </p>
       
 
@@ -801,19 +804,19 @@ dimBackground(0.5f,1.0f);
 
 
   
-    <article id="post-Android技术/RecyclerView#ItemDecoration入门与进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Android技术/使app出现在“用其他应用打开”列表当中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/">RecyclerView#ItemDecoration入门与进阶</a>
+      <a class="article-title" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">使app出现在“用其他应用打开”列表当中</a>
     </h1>
   
 
         
-        <a href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/" class="archive-article-date">
+        <a href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/" class="archive-article-date">
   	<time datetime="2018-01-24T02:24:16.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
 </a>
         
@@ -821,15 +824,12 @@ dimBackground(0.5f,1.0f);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用RecyclerView替代ListView已经是老生常谈的话题了，RecyclerView的优秀和灵活已经经过了大量项目的实践。最近在完成一个分组列表的需求时，使用到ItemDecoration，故在此对其做一番总结，加深对其的理解。</p>
-<h1 id="ItemDecoration介绍"><a href="#ItemDecoration介绍" class="headerlink" title="ItemDecoration介绍"></a>ItemDecoration介绍</h1><blockquote>
-<p>An ItemDecoration allows the application to add a special drawing and layout offset to specific item views from the adapter’s data set. This can be useful for drawing dividers between items, highlights, visual grouping boundaries and more. </p>
-<p>ItemDecoration允许应用结合adapter的数据集，对特定的item添加绘制一个周边图案。可以用于给items之间添加分割线、高亮装饰效果或者分组边界等等。</p>
+        <p>实际上，这是一种隐式启动activity的方式。<br>为此，需要在AndroidMainfest文件中，申明隐式打开的过滤条件。<br>实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;intent-filter&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</div><div class="line">	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;data android:scheme=&quot;file&quot;/&gt;</div><div class="line">	&lt;data android:scheme=&quot;content&quot;/&gt;</div><div class="line"></div><div class="line">	&lt;data android:mimeType=&quot;application/zip&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">	&lt;data android:mimeType=&quot;text/comma-separated-values&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/intent-filter&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>.csv文件关联的写法比较特别，不是用缩写</p>
+<p>是否能申明使用dialog或者fragment去处理外部传入的数据？</p>
 </blockquote>
-<p>从谷歌官方的介绍可以知道，ItemDecoration是用于给列表的item添加各种装饰效果，开发中最常见的就是为item添加分割线。<br>ItemDecoration本身是一个抽象类，抛去废弃的方法，我们需要关心的方法只有三个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static abstract class ItemDecoration &#123;</div><div class="line">    public void onDraw(Canvas c, RecyclerView parent, State state) &#123;</div><div class="line">        onDraw(c, parent);</div><div class="line">    &#125;</div><div class="line">    public void onDrawOver(Canvas c, RecyclerView parent, State state) &#123;</div><div class="line">        onDrawOver(c, parent);</div><div class="line">    &#125;</div><div class="line">    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) &#123;</div><div class="line">        getItemOffsets(outRect, ((LayoutParams) view.getLayoutParams()).getViewLayoutPosition(),parent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/#more">more >></a>
-        
+
       
 
       
@@ -852,7 +852,7 @@ dimBackground(0.5f,1.0f);
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/Android技术/RecyclerView#ItemDecoration入门与进阶/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/24/Android技术/使app出现在“用其他应用打开”列表当中/">展开全文 >></a>
         </p>
       
 
@@ -1065,10 +1065,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
@@ -1082,6 +1078,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">译文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
